@@ -1,0 +1,32 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
+
+Rails:
+  Enabled: true
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'node_modules/**/*'
+    - 'db/**/*'
+    - 'bin/*'
+    - 'vendor/**/*'
+    - 'config/environments/*'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/RedundantFetchBlock:
+  Exclude:
+    - config/**/*
+
+Metrics/BlockLength:
+  IgnoredMethods: ['describe', 'context']
+
+Rails/FilePath:
+  EnforcedStyle: arguments

@@ -10,32 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_210137) do
-
+ActiveRecord::Schema.define(version: 20_211_117_210_137) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "comments", force: :cascade do |t|
-    t.string "name"
-    t.bigint "task_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["task_id"], name: "index_comments_on_task_id"
+  create_table 'comments', force: :cascade do |t|
+    t.string 'name'
+    t.bigint 'task_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['task_id'], name: 'index_comments_on_task_id'
   end
 
-  create_table "projects", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'projects', force: :cascade do |t|
+    t.string 'name'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "tasks", force: :cascade do |t|
-    t.string "name"
-    t.boolean "completed"
-    t.bigint "project_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["project_id"], name: "index_tasks_on_project_id"
+  create_table 'tasks', force: :cascade do |t|
+    t.string 'name'
+    t.boolean 'completed'
+    t.bigint 'project_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['project_id'], name: 'index_tasks_on_project_id'
   end
-
 end
