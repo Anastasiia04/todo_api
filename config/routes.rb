@@ -1,3 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :projects, only: :show do
+        resources :tasks, only: :show do
+          resources :comments, only: [:create, :destroy]
+        end
+      end
+    end
+  end
 end
