@@ -1,19 +1,29 @@
 module Api
   module V1
     class ProjectsController < ApplicationController
+      before_action :authorize_access_request!
+      before_action :set_project, only: %i[update destroy]
+
       def index
-        @projects = Project.all
-        render json: ProjectSerializer.new(@projects).serializable_hash.to_json
+        projects = current_user.projects
+        render json: ProjectSerializer.new(projects).serializable_hash.to_json
       end
 
       def create
-        @project = Project.create(project_params)
-        render json: ProjectSerializer.new(@project).serializable_hash.to_json
+        project = current_user.projects.new(project_params)
+        if project.save
+          render json: ProjectSerializer.new(project).serializable_hash.to_json
+        else
+          render json: project.errors.messages.to_json
+        end
       end
 
       def update
-        @project.update(project_params)
-        render json: ProjectSerializer.new(@project).serializable_hash.to_json
+        if @project.update(project_params)
+          render json: ProjectSerializer.new(@project).serializable_hash.to_json
+        else
+          render json: @project.errors.messages.to_json
+        end
       end
 
       def destroy
@@ -22,6 +32,10 @@ module Api
       end
 
       private
+
+      def set_project
+        @project = current_user.projects.find(params[:id])
+      end
 
       def project_params
         params.permit(:name)

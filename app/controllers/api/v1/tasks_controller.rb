@@ -1,16 +1,24 @@
 module Api
   module V1
     class TasksController < ApplicationController
-      before_action :set_task, only: %i[complete update destroy]
+      before_action :authorize_access_request!
+      before_action :set_task, only: %i[update destroy complete]
 
       def create
-        @task = Task.create(task_params)
-        render json: TaskSerializer.new(@task).serializable_hash.to_json
+        task = current_user.tasks.new(task_params)
+        if task.save
+          render json: TaskSerializer.new(task).serializable_hash.to_json
+        else
+          render json: task.errors.messages.to_json
+        end
       end
 
       def update
-        @task.update(task_params)
-        render json: TaskSerializer.new(@task).serializable_hash.to_json
+        if @task.update(task_params)
+          render json: TaskSerializer.new(@task).serializable_hash.to_json
+        else
+          render json: @task.errors.messages.to_json
+        end
       end
 
       def destroy
@@ -26,7 +34,7 @@ module Api
       private
 
       def set_task
-        @task = Task.find(params[:id])
+        @task = current_user.tasks.find(params[:id])
       end
 
       def task_params

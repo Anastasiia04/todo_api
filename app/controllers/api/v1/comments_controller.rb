@@ -1,13 +1,19 @@
 module Api
   module V1
     class CommentsController < ApplicationController
+      before_action :authorize_access_request!
+
       def create
-        @comment = Comment.create(comment_params)
-        render json: CommentSerializer.new(@comment).serializable_hash.to_json
+        comment = current_user.comments.new(comment_params)
+        if comment.save
+          render json: CommentSerializer.new(comment).serializable_hash.to_json
+        else
+          render json: comment.errors.messages.to_json
+        end
       end
 
       def destroy
-        @comment.destroy
+        current_user.comments.find(params[:id]).destroy
         head :ok
       end
 
