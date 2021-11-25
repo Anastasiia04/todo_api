@@ -1,9 +1,5 @@
 RSpec.describe Api::V1::ProjectsController, type: :request do
-  let(:user) { create(:user) }
-  let(:payload) { { user_id: user.id } }
-  let(:tokens) { JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true).login }
-  let(:access_token) { tokens[:access] }
-  let(:auth_params) { { 'Authorization' => "Bearer #{access_token}" } }
+  include_context 'with authorization'
 
   describe 'GET #index' do
     let(:projects_count) { 3 }
