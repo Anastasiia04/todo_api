@@ -9,7 +9,7 @@ module Api
         if task.save
           render json: TaskSerializer.new(task).serializable_hash.to_json
         else
-          render json: task.errors.messages.to_json
+          render json: task.errors.messages.to_json, status: :unprocessable_entity
         end
       end
 
@@ -17,7 +17,7 @@ module Api
         if @task.update(task_params)
           render json: TaskSerializer.new(@task).serializable_hash.to_json
         else
-          render json: @task.errors.messages.to_json
+          render json: @task.errors.messages.to_json, status: :unprocessable_entity
         end
       end
 

@@ -14,7 +14,7 @@ module Api
         if project.save
           render json: ProjectSerializer.new(project).serializable_hash.to_json
         else
-          render json: project.errors.messages.to_json
+          render json: project.errors.messages.to_json, status: :unprocessable_entity
         end
       end
 
@@ -22,7 +22,7 @@ module Api
         if @project.update(project_params)
           render json: ProjectSerializer.new(@project).serializable_hash.to_json
         else
-          render json: @project.errors.messages.to_json
+          render json: @project.errors.messages.to_json, status: :unprocessable_entity
         end
       end
 

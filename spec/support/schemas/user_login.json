@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "required": [
+      "csrf",
+      "access",
+      "access_expires_at",
+      "refresh",
+      "refresh_expires_at"
+  ],
+  "properties": {
+      "csrf": {
+          "$id": "#/properties/csrf",
+          "type": "string",
+          "title": "The csrf schema"
+      },
+      "access": {
+          "$id": "#/properties/access",
+          "type": "string",
+          "title": "The access schema"
+      },
+      "access_expires_at": {
+          "$id": "#/properties/access_expires_at",
+          "type": "string",
+          "title": "The access_expires_at schema"
+      },
+      "refresh": {
+          "$id": "#/properties/refresh",
+          "type": "string",
+          "title": "The refresh schema"
+      },
+      "refresh_expires_at": {
+          "$id": "#/properties/refresh_expires_at",
+          "type": "string",
+          "title": "The refresh_expires_at schema"
+      }
+  },
+  "additionalProperties": true
+}

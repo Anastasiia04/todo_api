@@ -8,9 +8,11 @@ module Api
           session = JWTSessions::Session.new(payload: payload)
           render json: session.login
         else
-          render json: 'Invalid user', status: :unauthorized
+          render json: { errors: 'Invalid user' }, status: :unauthorized
         end
       end
     end
   end
 end
+# expect(JSON.parse(response.body)).to eq(errors: 'Invalid user')
+# expect(JSON.parse(response.status)).to eq(:unauthorized)

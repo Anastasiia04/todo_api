@@ -6,7 +6,7 @@ module Api
         if @user.save
           head :created
         else
-          render json: @user.errors.messages.to_json
+          render json: @user.errors.messages.to_json, status: :unprocessable_entity
         end
       end
     end

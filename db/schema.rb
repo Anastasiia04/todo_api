@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_181815) do
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.bigint "task_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_181815) do
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_181815) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.boolean "completed", default: false
     t.bigint "project_id"
     t.datetime "created_at", precision: 6, null: false

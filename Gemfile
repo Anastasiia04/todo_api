@@ -28,6 +28,7 @@ end
 
 group :test do
   gem 'factory_bot_rails'
+  gem 'json_schemer'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'simplecov'

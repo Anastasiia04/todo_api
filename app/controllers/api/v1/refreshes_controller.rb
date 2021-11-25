@@ -4,14 +4,8 @@ module Api
       before_action :authorize_refresh_request!
 
       def create
-        session = JWTSessions::Session.new(payload: access_payload)
+        session = JWTSessions::Session.new(payload: payload)
         render json: session.refresh(found_token)
-      end
-
-      private
-
-      def access_payload
-        build_access_payload_based_on_refresh(payload)
       end
     end
   end

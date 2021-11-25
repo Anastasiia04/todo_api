@@ -1,7 +1,12 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'simplecov'
-SimpleCov.start 'rails'
-SimpleCov.minimum_coverage 90
+SimpleCov.start 'rails' do
+  minimum_coverage 90
+
+  add_filter 'app/channels'
+  add_filter 'app/jobs'
+  add_filter 'app/mailers'
+end
 
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'

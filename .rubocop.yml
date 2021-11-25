@@ -30,3 +30,13 @@ Metrics/BlockLength:
 
 Rails/FilePath:
   EnforcedStyle: arguments
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Max: 3
+
+RSpec/FilePath:
+  Exclude:
+    - 'spec/requests/**/*'
